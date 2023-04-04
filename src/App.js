@@ -13,7 +13,7 @@ function App() {
   const component = {
     dashboard: Dashboard,
     cart: Cart,
-    review: <></>
+    review:<></>
   }
   let Component = component[currentInterFace]
   return (

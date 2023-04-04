@@ -9,7 +9,6 @@ import { MainContext } from '../context/MainProvider';
 export default function ProductCard(props) {
     let { id, image, description, price, category } = props.product;
     const {  handleSetCartItems, itemKeys } = React.useContext(MainContext)
-    console.log(props)
     return (
         <Card sx={{ maxWidth: 345, margin: "10px" }} id={id}>
             <CardActionArea>

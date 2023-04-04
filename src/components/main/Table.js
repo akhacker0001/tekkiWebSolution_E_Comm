@@ -9,6 +9,7 @@ import TableFooter from '@mui/material/TableFooter';
 import Paper from '@mui/material/Paper';
 import { MainContext } from '../context/MainProvider';
 import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -24,7 +25,17 @@ const rows = [
 
 export default function BasicTable() {
   const { cartItems } = React.useContext(MainContext)
+  const [totalPrice,setTotalPrice] = React.useState(0)
+  React.useEffect(()=>{
+    let total = 0
+     cartItems.forEach((ele)=>{
+      total += Number(ele.price)
+    })
+    setTotalPrice(total)
+
+  },[cartItems])
   return (
+    <>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 350 }} aria-label="simple table">
         <TableHead>
@@ -50,12 +61,9 @@ export default function BasicTable() {
             </TableRow>
           ))}
         </TableBody>
-        <TableFooter>
-          <TableRow>
-            total
-          </TableRow>
-        </TableFooter>
       </Table>
     </TableContainer>
+    <Box sx={{padding:"10px",textAlign:"right"}} >Total  {totalPrice}</Box>
+    </>
   );
 }
