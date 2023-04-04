@@ -1,23 +1,35 @@
 import logo from './logo.svg';
 import './App.css';
+import BasicGrid from './components/main';
+import Dashboard from './components/dashboard/Dashboard';
+import Header from './components/navbar';
+import { useContext } from 'react';
+import { MainContext } from './components/context/MainProvider';
+import Cart from './components/cart';
+import Container from '@mui/material/Container';
 
 function App() {
+  const { currentInterFace, setCurrentInterFace } = useContext(MainContext)
+  const component = {
+    dashboard: Dashboard,
+    cart: Cart,
+    review: <></>
+  }
+  let Component = component[currentInterFace]
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <BasicGrid /> */}
+      <div>
+
+        <Header />
+      </div>
+      {/* <Dashboard /> */}
+      {Component &&
+        <Container maxWidth="lg" sx={{ marginTop: "100px" }} >
+
+          <Component />
+        </Container>
+      }
     </div>
   );
 }
