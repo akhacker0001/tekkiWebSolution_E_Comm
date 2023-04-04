@@ -24,7 +24,10 @@ const Review = () => {
 
                 </Grid>
             </Grid>
-            <Button variant="contained">Submit Order</Button>
+            <Button variant="contained" onClick={()=>{
+                alert("orderd successfully")
+                window.location.href = "/"
+            }}  >Submit Order</Button>
         </Box>
     )
 }
