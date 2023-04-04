@@ -16,6 +16,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { MainContext } from '../context/MainProvider';
 import { interfaces } from '../utils/formConstant';
 import Badge from '@mui/material/Badge';
+import HomeIcon from '@mui/icons-material/Home';
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -27,8 +28,12 @@ function Header() {
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
-    const handleOpenUserMenu = (event) => {
-        setCurrentInterFace(interfaces.cart)
+    const handleOpenUserMenu = (val) => {
+        if(val==="home"){
+            setCurrentInterFace(interfaces.dashboard)
+        }else{
+            setCurrentInterFace(interfaces.cart)
+        }
     };
 
     const handleCloseNavMenu = () => {
@@ -48,8 +53,16 @@ function Header() {
 
 
                     <Box sx={{ flexGrow: 0, }}>
+                    <Tooltip title="Dashboard" sx={{marginRight:"100px"}} >
+                            <IconButton onClick={()=>handleOpenUserMenu("home")} sx={{ p: 0, marginRight:"50px" }}>
+
+                                    <HomeIcon sx={{ color: "white" }} />
+                           
+
+                            </IconButton>
+                        </Tooltip>
                         <Tooltip title="Open cart">
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                            <IconButton onClick={()=>handleOpenUserMenu("cart")} sx={{ p: 0 }}>
                                 <Badge badgeContent={cartItems.length} color="secondary">
                                     <ShoppingCartIcon sx={{ color: "white" }} />
                                 </Badge>
